@@ -1,8 +1,26 @@
-# React + Vite
+# ADMIN BURGUER SMITH
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Pagina administrativa, feita para o gerenciamento de produtos,clientes e pedidos do projeto de hamburgueria virtual (Burguer smith).
+A aplicação utiliza a linguagem javascript com React.js para o desenvolvimento de uma SPA (simple page aplication). 
 
-Currently, two official plugins are available:
+**A aplicação ADMIN BURGUER SMITH é um projeto desenvolvido para a prática da linguagem javascript tanto no servidor quanto no front-end!**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Como utilizar
+
+1. Faça o clone do projeto utilizando git:
+
+```
+git clone https://github.com/DiogoSilvaBianchini/admin-page-burguer-smith.git
+```
+
+2. Instale as depenciâs do projeto utilizando NPM ou Yarn:
+
+```
+npm i
+```
+
+3. Utilize o npm para rodar o projeto:
+
+```
+npm run start
+```
