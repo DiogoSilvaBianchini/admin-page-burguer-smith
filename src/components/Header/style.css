@@ -1,0 +1,29 @@
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #222;
+    padding: 0 16px;
+}
+
+header img{
+    width: 48px;
+}
+
+header nav{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+header a{
+    color: #fff;
+}
+
+header ul{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+}
