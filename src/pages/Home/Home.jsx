@@ -1,8 +1,10 @@
+import InfoMenu from "../../components/infoMenu/InfoMenu"
 import "./style.css"
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <div className="home-container">
+    </div>
   )
 }
 

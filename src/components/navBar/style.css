@@ -1,0 +1,52 @@
+.navBar-container{
+    width: 250px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #222;
+}
+
+.navBar-container .perfil{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    margin: 16px 0px;
+}
+
+.navBar-container .perfil img{
+    width: 64px;
+}
+
+.navBar-container .perfil .text-perfil{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    color: #fff;
+    font-family: var(--principal-font);
+}
+
+.navBar-container .perfil .text-perfil h2{
+    font-size: 1.2rem;
+}
+
+.navBar-container .perfil .text-perfil span{
+    font-size: 12px;
+}
+
+.navBar-container nav ul{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 8px;
+    gap: 16px;
+}
+
+.navBar-container nav ul li, .navBar-container a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}

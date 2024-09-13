@@ -1,0 +1,77 @@
+.form-product{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-product form{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.form-product form button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.form-product form .categorySelect{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.form-product form .categorySelect ul{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.form-product form .categorySelect > span{
+    width: 100%;
+    justify-self: flex-start;
+}
+
+.form-product form .categorySelect ul li{
+    width: 100%;
+}
+
+.form-product form ul li .box-category{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    color: #ccc;
+}
+
+.form-product form ul li .box-category span{
+    display: none;
+    opacity: 0;
+    color: #fff;
+}
+
+.form-product form ul li .active{
+    width: 100%;
+    background-color: #FE7411;
+    color: #fff;
+    transition: .4s;
+    justify-content: flex-start;
+}
+
+.form-product form ul li .active span{
+    display: inline;
+    opacity: 1;
+}

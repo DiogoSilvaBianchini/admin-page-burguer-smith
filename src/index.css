@@ -7,6 +7,7 @@
 *{
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 ul, li, ol{
@@ -21,6 +22,40 @@ a{
   color: #222;
 }
 
-.active{
+a.active{
   color: var(--principal-color);
+}
+
+a{
+  color: #fff;
+}
+
+span{
+  font-family: var(--principal-font);
+  font-size: 14px;
+}
+
+h2{
+  font-size: 2rem;
+  font-family: var(--principal-font);
+  font-weight: 600;
+}
+
+button{
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 4px;
+  font-family: var(--principal-font);
+  letter-spacing: 1px;
+}
+
+.darkButton{
+  color: #fff;
+  background-color: #222;
+  border: none;
+  transition: .4s;
+}
+
+.darkButton:hover{
+  background-color: #333;
 }
