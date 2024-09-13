@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import './style.css'
 
-const InputFile = ({title, change, value}) => {
+const InputFile = ({title, change, previewImgs, setPreviewImgs, setCoverImg}) => {
   const idInput = Math.floor(Math.random() * 1E2)
-  const [previewImgs, setPreviewImgs] = useState([])
+  
 
   const renderImages = (e) => {
     change(e.target.files)
@@ -24,15 +24,16 @@ const InputFile = ({title, change, value}) => {
     })
   }
 
-  const activeImage = (e) => {
+  const activeImage = (e, imgSrc) => {
     const element = e.target
     removeActiveAllElements()
     if(element.className.includes("imgBtn")){
       const btn = element.parentElement
       btn.classList.add("activeBtn")
-    }else[
+    }else{
       element.classList.add("activeBtn")
-    ]
+    }
+    setCoverImg(imgSrc)
   }
 
   return (
@@ -47,7 +48,7 @@ const InputFile = ({title, change, value}) => {
             {
               previewImgs.map((imgSrc, i) => (
                 <li key={i}>
-                  <button onClick={activeImage}>
+                  <button onClick={(e) => activeImage(e, imgSrc)}>
                     <img className='imgBtn' src={imgSrc} alt="preview image" />
                   </button>
                 </li>
