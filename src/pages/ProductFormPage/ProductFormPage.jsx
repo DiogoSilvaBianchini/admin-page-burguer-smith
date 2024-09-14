@@ -10,10 +10,15 @@ import CardProduct from '../../components/cardProduct/CardProduct';
 
 const ProductFormPage = () => {
   const [category, setCategory] = useState("")
+  const [allCategorys, setAllCategorys] = useState([])
   const [title, setTitle] = useState("")
+  const [titleError, setTitleError] = useState("")
   const [price, setPrice] = useState("")
+  const [priceError, setPriceError] = useState("")
   const [describe, setDescribe] = useState("")
+  const [describeError, setDescribeError] = useState("")
   const [imgs, setImgs] = useState([])
+  const [imgsError, setImgsError] = useState("")
   const [previewImgs, setPreviewImgs] = useState([])
   const [coverImg, setCoverImg] = useState()
 
@@ -21,33 +26,89 @@ const ProductFormPage = () => {
     if(!coverImg && previewImgs){
       setCoverImg(previewImgs[0])
     }
-    console.log(previewImgs[0])
   }, [previewImgs])
+
+  const handdleSubmit = async (e) => {
+    e.preventDefault()
+    const validated = validationForm()
+    const body = bodyBuilding()
+
+    if(validated){
+      const httpRequest = await fetch("http://localhost:8082/product", {
+        method: "POST",
+        body
+      })
+      const httpResponse = await httpRequest.json()
+      console.log(httpResponse)
+    }
+  }
+
+  const bodyBuilding = () => {
+    const body = new FormData()
+    body.append("title", title)
+    body.append("price", price)
+    body.append("describe", describe)
+    body.append("categoryId", category)
+    
+    imgs.map((img) => {
+      body.append("imgs", img)
+    })
+    return body
+  }
+
+  const validationForm = () => {
+    let validated = true
+    if(!title){
+      setTitleError("O produto precisa de um título.")
+      validated = false
+    }else{
+      setTitleError("")
+    }
+    if(!price){
+      setPriceError("O produto precisa de um preço.")
+      validated = false
+    }else{
+      setPriceError("")
+    }
+    if(!describe){
+      setDescribeError("O produto precisa de uma descrição.")
+      validated = false
+    }else{
+      setDescribeError("")
+    }
+    if(imgs.length <= 0){
+      setImgsError("Adicione ao menos 1 foto para o produto.")
+      validated = false
+    }else{
+      setImgsError("")
+    }
+    return validated
+  }
 
   return (
     <div className='form-product'>
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form onSubmit={handdleSubmit}>
             <h2>Criar novo produto</h2>
-            <InputLabel title="Nome" change={setTitle} value={title}/>
-            <InputLabel title="Preço" change={setPrice} value={price}/>
-            <InputLabel title="Descrição" change={setDescribe} value={describe}/>
+            <InputLabel title="Nome" change={setTitle} value={title} errorText={titleError}/>
+            <InputLabel title="Preço" change={setPrice} value={price} errorText={priceError}/>
+            <InputLabel title="Descrição" change={setDescribe} value={describe} errorText={describeError}/>
             <div className="categorySelect">
               <span>Categoria</span>
               <ul>
                 <li>
-                  <button onClick={() => setCategory("hamburguer")} className={category == "hamburguer" ? "box-category active":"box-category"}>
+                  <button type='button' onClick={() => setCategory(2)} className={category == 2 ? "box-category active":"box-category"}>
                     <LunchDiningOutlinedIcon />
                     <span>Hamburguer</span>
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => setCategory("bebidas")} className={category == "bebidas" ? "box-category active":"box-category"}>
+                  <button type='button' onClick={() => setCategory(3)} className={category == 3 ? "box-category active":"box-category"}>
                     <LiquorOutlinedIcon />
                     <span>Bebida</span>
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => setCategory("aperitivo")} className={category == "aperitivo" ? "box-category active":"box-category"}>
+                  <button type='button' onClick={() => setCategory(1)} className={category == 1 ? "box-category active":"box-category"}>
                     <TapasOutlinedIcon />
                     <span>Aperitivo</span>
                   </button>
@@ -61,6 +122,7 @@ const ProductFormPage = () => {
               setPreviewImgs={setPreviewImgs} 
               previewImgs={previewImgs}
               setCoverImg={setCoverImg}
+              errorText={imgsError}
               />
             <button className='darkButton'><BookmarkAddedOutlinedIcon /> Registrar</button>
         </form>

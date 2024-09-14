@@ -21,15 +21,10 @@
 
 .input-label .input-label-error{
     width: 100%;
-    background-color: #f00b0b8e;
     border-radius: 4px;
     padding: 4px 0px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 8px;
-}
-
-.input-label .input-label-error svg{
-    color: rgb(221, 0, 0);
+    gap: 4px;
 }

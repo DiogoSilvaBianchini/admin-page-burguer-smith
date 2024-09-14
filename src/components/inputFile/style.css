@@ -53,3 +53,12 @@
     max-width: 70px;
     max-height: 70px;
 }
+
+.input-file-container .text-error{
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 4px;
+}

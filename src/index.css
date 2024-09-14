@@ -2,6 +2,7 @@
 :root{
   --principal-font: Inter, sans-serif;
   --principal-color: #FE7411;
+  --error-text-color: #dd0000;
 }
 
 *{
@@ -62,4 +63,13 @@ button{
 
 .darkButton:hover{
   background-color: #333;
+}
+
+.text-error{
+  font-size: 14px;
+  color: var(--error-text-color);
+}
+
+.text-error svg{
+  font-size: 1.2rem;
 }

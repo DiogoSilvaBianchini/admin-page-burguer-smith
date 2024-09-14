@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import './style.css'
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
-const InputFile = ({title, change, previewImgs, setPreviewImgs, setCoverImg}) => {
+const InputFile = ({title, change, previewImgs, setPreviewImgs, setCoverImg, errorText}) => {
   const idInput = Math.floor(Math.random() * 1E2)
   
 
   const renderImages = (e) => {
-    change(e.target.files)
+    change([...e.target.files])
     const file = [...e.target.files]
 
     file.map((img) => {
@@ -56,6 +57,9 @@ const InputFile = ({title, change, previewImgs, setPreviewImgs, setCoverImg}) =>
             }
           </ul>
         )
+      }
+      {
+        errorText && <span className='text-error'><InfoOutlinedIcon /> {errorText}</span>
       }
     </div>
   )
