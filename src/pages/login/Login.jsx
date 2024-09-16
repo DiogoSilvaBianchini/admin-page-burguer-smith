@@ -28,7 +28,7 @@ const Login = () => {
                 <Link>Esqueceu sua senha?</Link>
             </div>
             <button type='submit' className='darkButton'>Login</button>
-            <Link type='submit' className='linkButton outLineButton'>Registra-se</Link>
+            <Link to='/register' className='linkButton outLineButton'>Registra-se</Link>
             <span>ou</span>
             <GoogleLogin 
               onSuccess={googleSucessLogin} 

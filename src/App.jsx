@@ -5,6 +5,7 @@ import Home from './pages/Home/Home'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import ProductFormPage from './pages/ProductFormPage/ProductFormPage'
 import Login from './pages/login/Login'
+import Register from './pages/Register/Register'
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Route path='/produtos' element={<ProductPage />}/>
             <Route path='/produtos/criar' element={<ProductFormPage />}/>
             <Route path='/login' element={<Login />}/>
+            <Route path='/register' element={<Register />}/>
           </Routes>
         </div>
       </BrowserRouter>
