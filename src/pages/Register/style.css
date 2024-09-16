@@ -1,12 +1,12 @@
 .container-register{
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background-color: #efefef;
+    background-color: #f0f0f0;
 }
 
 .container-register form > span{
@@ -15,12 +15,12 @@
 
 .container-register form{
     width: 35%;
-    min-width: 250px;
+    min-width: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: 12px;
     background-color: #fff;
     padding: 16px;
     border-radius: 16px;
@@ -29,4 +29,8 @@
 .container-register form span a{
     color: rgb(0, 81, 255);
     cursor: pointer;
+}
+
+.textError{
+    color: red;
 }

@@ -3,7 +3,12 @@ import InputLabel from '../../components/inputLabel/InputLabel'
 import { Link } from 'react-router-dom'
 import { GoogleLogin } from '@react-oauth/google'
 import {jwtDecode} from 'jwt-decode'
+import { useState } from 'react'
+
 const Login = () => {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
   const googleSucessLogin = (credentialResponse) => {
     let token = credentialResponse.credential
     let decodeToken = jwtDecode(token)
@@ -18,8 +23,8 @@ const Login = () => {
     <div className='login-container'>
         <form>
             <h2>Bem-vindo</h2>
-            <InputLabel title="E-mail"/>
-            <InputLabel title="Senha" typeField="password"/>
+            <InputLabel title="E-mail" change={setEmail} value={email}/>
+            <InputLabel title="Senha" typeField="password" change={setPassword} value={password}/>
             <div className="settings">
                 <label htmlFor="loginSave" className='label-save'>
                     <input type="checkbox" name="loginSave" id="loginSave" />
