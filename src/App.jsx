@@ -4,9 +4,10 @@ import NavBar from './components/navBar/NavBar'
 import Home from './pages/Home/Home'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import ProductFormPage from './pages/ProductFormPage/ProductFormPage'
+import Login from './pages/login/Login'
+
 
 function App() {
-
   return (
     <div className="App">
       <BrowserRouter>
@@ -16,6 +17,7 @@ function App() {
             <Route path='/' element={<Home />}/>
             <Route path='/produtos' element={<ProductPage />}/>
             <Route path='/produtos/criar' element={<ProductFormPage />}/>
+            <Route path='/login' element={<Login />}/>
           </Routes>
         </div>
       </BrowserRouter>
