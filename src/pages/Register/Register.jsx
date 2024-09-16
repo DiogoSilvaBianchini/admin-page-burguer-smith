@@ -1,6 +1,6 @@
 import './style.css'
 import InputLabel from '../../components/inputLabel/InputLabel'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
 const Register = () => {
@@ -17,20 +17,28 @@ const Register = () => {
     const [term, setTerm] = useState(false)
     const [termError, setTermError] = useState(false)
 
+    const navigate = useNavigate()
+
     const handdleSubmite = async (e) => {
         e.preventDefault()
         const body = createBody()
         const validated = validationForm()
         if(validated){
-            // const req = await fetch(`${import.meta.env.VITE_BACK_END_URL}/user`, {
-            //     headers: {"Content-Type":"application/json"},
-            //     method: "POST",
-            //     body: JSON.stringify(body)
-            // })
+            const req = await fetch(`${import.meta.env.VITE_BACK_END_URL}/user`, {
+                headers: {"Content-Type":"application/json"},
+                method: "POST",
+                body: JSON.stringify(body)
+            })
 
-            // const res = await req.json()
-            // console.log(res)
-            console.log(validated)
+            const res = await req.json()
+
+            if(res.status == 201){
+                navigate("/")
+            }
+
+            if(res.results == "E-mail já registrado"){
+                setEmailError("E-mail já registrado")
+            }
         }
     }
 
@@ -95,8 +103,8 @@ const Register = () => {
             <InputLabel title={"Nome"} change={setName} value={name} errorText={nameError}/>
             <InputLabel title={"E-mail"} change={setEmail} value={email} errorText={emailError}/>
             <InputLabel title={"Confirme seu e-mail"} change={setConfirmEmail} value={confirmEmail} errorText={confirmEmailError}/>
-            <InputLabel title={"Senha"} change={setPassword} value={password} errorText={passwordError}/>
-            <InputLabel title={"Confirme sua Senha"} change={setConfirmPassword} value={confirmPassword} errorText={confirmPasswordError}/>
+            <InputLabel title={"Senha"} typeField={"password"} change={setPassword} value={password} errorText={passwordError}/>
+            <InputLabel title={"Confirme sua Senha"} typeField={"password"} change={setConfirmPassword} value={confirmPassword} errorText={confirmPasswordError}/>
             <label htmlFor="term">
                 <input type="checkbox" name="term" id="term" onChange={(e) => setTerm(e.target.checked)} checked={term}/>
                 <span className={termError ? "textError":""}> Li e concordo com os <a href='#'>Termos e condições</a> de uso dessa aplicação</span>

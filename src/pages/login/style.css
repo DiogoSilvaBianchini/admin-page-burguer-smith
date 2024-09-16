@@ -47,3 +47,10 @@ form .settings a{
     text-align: end;
     color: rgb(0, 102, 255);
 }
+
+form .errorText{
+    border: 1px solid #e60000;
+    color: #e60000;
+    padding: 8px;
+    border-radius: 8px;
+}
