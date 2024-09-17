@@ -1,0 +1,27 @@
+.card-horizontal-container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-horizontal-container .row{
+    width: 33%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+}
+
+
+.card-horizontal-container .row img{
+    width: 100px;
+}
+
+.card-horizontal-container .row h2{
+    font-size: 1.5rem;
+}
+
+.card-horizontal-container span{
+    width: 33%;
+}
