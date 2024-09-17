@@ -48,10 +48,8 @@ const InputFile = ({title, change, previewImgs, setPreviewImgs, setCoverImg, err
           <ul className='preview-buttons'>
             {
               previewImgs.map((imgSrc, i) => (
-                <li key={i}>
-                  <button onClick={(e) => activeImage(e, imgSrc)}>
-                    <img className='imgBtn' src={imgSrc} alt="preview image" />
-                  </button>
+                <li key={i} onClick={(e) => activeImage(e, imgSrc)}>
+                  <img className='imgBtn' src={imgSrc} alt="preview image" />
                 </li>
               ))
             }

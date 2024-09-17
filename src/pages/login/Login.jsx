@@ -3,7 +3,9 @@ import InputLabel from '../../components/inputLabel/InputLabel'
 import { Link, useNavigate } from 'react-router-dom'
 import { GoogleLogin } from '@react-oauth/google'
 import {jwtDecode} from 'jwt-decode'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import Cookies from 'js-cookie'
+import UserContext from '../../context/userContext'
 
 const Login = () => {
   const [email, setEmail] = useState("")
@@ -12,6 +14,7 @@ const Login = () => {
   const [passwordError, setPasswordError] = useState("")
   const [error, setError] = useState("")
   const navigate = useNavigate()
+  const { setToken } = useContext(UserContext)
   
   const googleSucessLogin = (credentialResponse) => {
     let token = credentialResponse.credential
@@ -46,6 +49,15 @@ const Login = () => {
     return {email, password}
   }
 
+  const createCookie = (token) => {
+    Cookies.set("token", token, {
+      expires: 1,
+      secure: false,
+      sameSite: 'Strict'
+    })
+    return true
+  }
+
   const handdleSubmite = async (e) => {
     e.preventDefault()
     const validate = validation()
@@ -61,6 +73,7 @@ const Login = () => {
       if(res.status == 401){
         setError("E-mail ou senha incorreto!")
       }else{
+        createCookie(res.results)
         navigate("/")
       }
     }

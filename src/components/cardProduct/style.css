@@ -6,8 +6,8 @@
     justify-content: center;
     gap: 8px;
     background-color: #fff;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
+    border-radius: 8px;
+    margin-top: 25px;
 }
 
 .card-container .img-container{

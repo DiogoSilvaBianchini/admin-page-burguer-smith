@@ -105,6 +105,15 @@ button{
   border-color: #121212;
 }
 
+.deleteButton{
+  background-color: #eb0000;
+  color: #fff;
+  border-color: transparent;
+}
+
+.deleteButton:hover{
+  background-color: #ff2828;
+}
 
 .text-error{
   font-size: 12px;

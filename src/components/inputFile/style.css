@@ -31,23 +31,26 @@
     padding: 8px 0px;
 }
 
-.input-file-container .preview-buttons button{
+.input-file-container .preview-buttons li{
     width: 75px;
     height: 75px;
     border: 2px solid #c4c4c4;
     background-color: transparent;
     margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.input-file-container .preview-buttons button:focus{
+.input-file-container .preview-buttons li:focus{
     outline: none;
 }
 
-.input-file-container .preview-buttons button.activeBtn{
+.input-file-container .preview-buttons li.activeBtn{
     border-color: var(--principal-color);
 }
 
-.input-file-container .preview-buttons button img{
+.input-file-container .preview-buttons li img{
     width: auto;
     height: auto;
     max-width: 70px;

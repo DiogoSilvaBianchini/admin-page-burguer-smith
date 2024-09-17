@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import EditIcon from '@mui/icons-material/Edit';
 import "./style.css"
 
@@ -11,7 +11,7 @@ const CardHorizontalProduct = ({id, imgUrl, title, price}) => {
           <h2>{title}</h2>
         </div>
         <span>R$ {price}</span>
-        <Link className="linkButton iconButton"><EditIcon /></Link>
+        <Link to={`/produtos/criar?id=${id}`} className="linkButton iconButton"><EditIcon /></Link>
     </div>
   )
 }

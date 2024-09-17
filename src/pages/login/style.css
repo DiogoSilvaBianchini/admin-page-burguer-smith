@@ -54,3 +54,7 @@ form .errorText{
     padding: 8px;
     border-radius: 8px;
 }
+
+.login-container form .outLineButton{
+    width: 100%;
+}
