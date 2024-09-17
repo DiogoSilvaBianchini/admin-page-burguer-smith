@@ -5,18 +5,29 @@ import Cookies from 'js-cookie'
 
 const AutoGuard = () => {
     const navigate = useNavigate()
-    const {token, setToken} = useContext(UserContext)
+    const {user, setUser} = useContext(UserContext)
 
     useEffect(() => {
-        const token = Cookies.get("token")
-        if(!token){
-            navigate("/login")
-        }else{
-            setToken(token)
+        const checkAuth = async () => {
+            const token = Cookies.get("token")
+            const req = await fetch(`${import.meta.env.VITE_BACK_END_URL}/user/checkin`, {
+                headers: {
+                    authorization: `Bearer ${token}`
+                }
+            })
+            const res = await req.json()
+
+            if(res.status == 401){
+                navigate("/login")
+                setUser({})
+            }else{
+                setUser(res.results)
+            }
         }
+        checkAuth()
     },[])
 
-  return token ? <Outlet /> : null
+  return user ? <Outlet /> : null
 }
 
 export default AutoGuard

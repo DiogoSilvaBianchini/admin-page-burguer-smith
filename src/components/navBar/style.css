@@ -1,5 +1,5 @@
 .navBar-container{
-    width: 250px;
+    width: 300px;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -28,7 +28,7 @@
 }
 
 .navBar-container .perfil .text-perfil h2{
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .navBar-container .perfil .text-perfil span{

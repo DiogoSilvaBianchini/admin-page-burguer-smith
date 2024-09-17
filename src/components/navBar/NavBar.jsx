@@ -5,15 +5,18 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import PersonIcon from '@mui/icons-material/Person';
 import ChecklistIcon from '@mui/icons-material/Checklist';
+import { useContext } from 'react';
+import UserContext from '../../context/userContext';
 
 const NavBar = () => {
+    const {user} = useContext(UserContext)
   return (
     <div className='navBar-container'>
         <div className="perfil">
             <img src="/logo.webp" alt="logo hamburgueria burguer smith" />
             <div className="text-perfil">
-                <h2>Burguer Smith</h2>
-                <span>Hamburgueria</span>
+                <h2>{user.name.toUpperCase()}</h2>
+                <span>Bem-vindo(a)</span>
             </div>
         </div>
         <nav>

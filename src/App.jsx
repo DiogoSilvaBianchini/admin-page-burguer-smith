@@ -9,13 +9,14 @@ import Register from './pages/Register/Register'
 import UserContext from './context/userContext'
 import { useContext, useEffect, useState } from 'react'
 import AutoGuard from './utils/AutoGuard'
-import Cookies from 'js-cookie'
+
 
 function App() {
-  const [token, setToken] = useState("")
+  const [user, setUser] = useState("")
+
   return (
     <div className="App">
-      <UserContext.Provider value={{token, setToken}}>
+      <UserContext.Provider value={{user, setUser}}>
         <BrowserRouter>
           <NavBar />
           <div className="content">
