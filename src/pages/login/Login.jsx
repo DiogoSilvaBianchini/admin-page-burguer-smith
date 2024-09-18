@@ -14,12 +14,10 @@ const Login = () => {
   const [passwordError, setPasswordError] = useState("")
   const [error, setError] = useState("")
   const navigate = useNavigate()
-  const { setToken } = useContext(UserContext)
   
   const googleSucessLogin = (credentialResponse) => {
     let token = credentialResponse.credential
     let decodeToken = jwtDecode(token)
-    console.log(decodeToken)
   }
 
   const googleErrorLogin = (err) => {

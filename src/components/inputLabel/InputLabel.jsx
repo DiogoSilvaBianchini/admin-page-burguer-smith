@@ -1,11 +1,11 @@
 import './style.css'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
-const InputLabel = ({title, typeField, change, value, errorText}) => {
+const InputLabel = ({title, id, typeField, change, value, errorText}) => {
   return (
-    <label htmlFor={title} className='input-label'>
+    <label htmlFor={id} className='input-label'>
         <span>{title}</span>
-        <input type={typeField ? typeField : "text"} autoComplete={typeField == "password" ? "current-password":""} value={value} onChange={(e) => change(e.target.value)}/>
+        <input type={typeField ? typeField : "text"} id={id} autoComplete={typeField == "password" ? "current-password":"none"} value={value} onChange={(e) => change(e.target.value)}/>
         {errorText && <span className='input-label-error text-error'><InfoOutlinedIcon /> {errorText ? errorText : `O campo obrigatorio`}</span>}
     </label>
   )

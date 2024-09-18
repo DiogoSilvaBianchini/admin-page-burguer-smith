@@ -5,14 +5,14 @@ import BookmarkAddedOutlinedIcon from '@mui/icons-material/BookmarkAddedOutlined
 import LunchDiningOutlinedIcon from '@mui/icons-material/LunchDiningOutlined';
 import LiquorOutlinedIcon from '@mui/icons-material/LiquorOutlined';
 import TapasOutlinedIcon from '@mui/icons-material/TapasOutlined';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import SyncIcon from '@mui/icons-material/Sync';
 import { useEffect, useState } from 'react';
 import CardProduct from '../../components/cardProduct/CardProduct';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import Cookies from 'js-cookie'
 
 const ProductFormPage = () => {
   const [category, setCategory] = useState("")
-  const [allCategorys, setAllCategorys] = useState([])
   const [title, setTitle] = useState("")
   const [titleError, setTitleError] = useState("")
   const [price, setPrice] = useState("")
@@ -23,9 +23,12 @@ const ProductFormPage = () => {
   const [imgsError, setImgsError] = useState("")
   const [previewImgs, setPreviewImgs] = useState([])
   const [coverImg, setCoverImg] = useState()
+  const [load, setLoad] = useState(false)
 
   const [searchParams] = useSearchParams()
   const id = searchParams.get("id")
+  const navigate = useNavigate()
+  const token = Cookies.get("token")
 
   useEffect(() => {
     const getProduct = async () => {
@@ -38,37 +41,49 @@ const ProductFormPage = () => {
       setDescribe(product.describe)
       setCategory(product.categoryId)
 
-      let imgs = []
-      product.imgs.map(img => {
-        imgs.push(`${import.meta.env.VITE_URL_S3}/${img}`)
-      })
-      setPreviewImgs(imgs)
-      setCoverImg(`${import.meta.env.VITE_URL_S3}/${product.imgs[0]}`)
+      if(product.imgs.length > 0){
+        product.imgs.map(img => {
+          setPreviewImgs([{s3: img}])
+        })
+        
+        setCoverImg(`${import.meta.env.VITE_URL_S3}/${product.imgs[0]}`)
+      }
     }
 
     id && getProduct()
   },[searchParams])
 
   useEffect(() => {
-    if(!coverImg && previewImgs){
-      setCoverImg(previewImgs[0])
+    if(previewImgs.length > 0){
+      if(previewImgs[0].s3){
+        setCoverImg(`${import.meta.env.VITE_URL_S3}/${previewImgs[0].s3}`)
+      }else{
+        setCoverImg(previewImgs[0].base64)
+      }
+    }else{
+      setCoverImg()
     }
-  }, [previewImgs])
+  }, [previewImgs, coverImg])
 
   const handdleSubmit = async (e) => {
     e.preventDefault()
+    setLoad(true)
     const validated = validationForm()
     const body = bodyBuilding()
     const url = id ? `http://localhost:8082/product/${id}`:"http://localhost:8082/product"
     const method = id ? "PUT" : "POST"
-    
+
     if(validated){
       const httpRequest = await fetch(url, {
         method: method,
         body
       })
       const httpResponse = await httpRequest.json()
-      console.log(httpResponse)
+
+      if(httpResponse.status == 201){
+        navigate("/produtos")
+        setLoad(false)
+      }
     }
   }
 
@@ -78,6 +93,7 @@ const ProductFormPage = () => {
     body.append("price", price)
     body.append("describe", describe)
     body.append("categoryId", category)
+    body.append("token", `Berear ${token}`)
     if(imgs){
       imgs.map((img) => {
         body.append("imgs", img)
@@ -115,13 +131,26 @@ const ProductFormPage = () => {
     return validated
   }
 
+  const removeItem = async () => {
+    const req = await fetch(`${import.meta.env.VITE_BACK_END_URL}/product/${id}`, {
+      headers: {
+        "Content-Type":"Application/json"
+      },
+      method: "DELETE",
+      body: JSON.stringify({token: `Berear ${token}`})
+    })
+    const res = await req.json()
+    if(res.status == 201){
+      navigate("/produtos")
+    }
+  }
   return (
     <div className='form-product'>
         <form onSubmit={handdleSubmit}>
             <h2>{id ? "Editar produto":"Criar novo produto"}</h2>
-            <InputLabel title="Nome" change={setTitle} value={title} errorText={titleError}/>
-            <InputLabel title="Preço" change={setPrice} value={price} errorText={priceError}/>
-            <InputLabel title="Descrição" change={setDescribe} value={describe} errorText={describeError}/>
+            <InputLabel title="Nome" id="name" change={setTitle} value={title} errorText={titleError}/>
+            <InputLabel title="Preço" id="price" change={setPrice} value={price} errorText={priceError}/>
+            <InputLabel title="Descrição" id="describe" change={setDescribe} value={describe} errorText={describeError}/>
             <div className="categorySelect">
               <span>Categoria</span>
               <ul>
@@ -147,6 +176,8 @@ const ProductFormPage = () => {
             </div>
             <InputFile 
               title="Adicione uma imagem" 
+              id="fileImage"
+              idProduct={id}
               value={imgs} 
               change={setImgs} 
               setPreviewImgs={setPreviewImgs} 
@@ -154,8 +185,10 @@ const ProductFormPage = () => {
               setCoverImg={setCoverImg}
               errorText={imgsError}
               />
-            <button className='darkButton'><BookmarkAddedOutlinedIcon /> Salvar</button>
-            {id && <button className='deleteButton'><DeleteForeverIcon /> Remover</button>}
+            <div className="column">
+              { !load ? <button className='darkButton'><BookmarkAddedOutlinedIcon /> Salvar</button> : <button className='disableButton'><SyncIcon /> Aguarde</button>}
+              {id && <input type='button' className='deleteButton' onClick={removeItem} value={"Remover produto"}/>}
+            </div>
         </form>
         <CardProduct title={title} price={price} imgUrl={coverImg}/>
     </div>

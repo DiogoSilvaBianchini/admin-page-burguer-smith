@@ -10,13 +10,19 @@ import UserContext from '../../context/userContext';
 
 const NavBar = () => {
     const {user} = useContext(UserContext)
+
   return (
     <div className='navBar-container'>
         <div className="perfil">
             <img src="/logo.webp" alt="logo hamburgueria burguer smith" />
             <div className="text-perfil">
-                <h2>{user.name.toUpperCase()}</h2>
-                <span>Bem-vindo(a)</span>
+                {user.name ?
+                    <>
+                        <h2>{user.name.toUpperCase()}</h2>
+                        <span>Bem-vindo(a)</span>
+                    </>:
+                    <h2>Bem-vindo(a)</h2>
+                }
             </div>
         </div>
         <nav>

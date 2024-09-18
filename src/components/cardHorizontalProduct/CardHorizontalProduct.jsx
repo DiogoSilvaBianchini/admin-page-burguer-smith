@@ -3,7 +3,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import "./style.css"
 
 const CardHorizontalProduct = ({id, imgUrl, title, price}) => {
-
   return (
     <div className='card-horizontal-container' id={`product${id}`}>
         <div className="row">

@@ -9,7 +9,6 @@ const CircleGraph = ({progress, title}) => {
     const timer = setInterval(() => {
       circle.style.strokeDashoffset = 440 - (440 * progress) / 100
       clearInterval(timer)
-      console.log(timer)
     }, 500)
   }
 

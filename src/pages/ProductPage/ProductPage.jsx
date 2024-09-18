@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const ProductPage = () => {
   const [products, setProducts] = useState([])
-
+  
   useEffect(() => {
     const getProducts = async () => {
       const req = await fetch(`${import.meta.env.VITE_BACK_END_URL}/product`)
