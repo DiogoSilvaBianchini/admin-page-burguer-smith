@@ -1,16 +1,20 @@
 import './style.css'
-import { NavLink } from 'react-router-dom'
-import HomeIcon from '@mui/icons-material/Home';
+import { NavLink, useNavigate } from 'react-router-dom'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
-import PersonIcon from '@mui/icons-material/Person';
-import ChecklistIcon from '@mui/icons-material/Checklist';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { useContext } from 'react';
 import UserContext from '../../context/userContext';
+import Cookies from 'js-cookie'
 
 const NavBar = () => {
     const {user} = useContext(UserContext)
-
+    const navigate = useNavigate()
+    
+    const logOut = (e) => {
+        Cookies.remove("token")
+        navigate("/login")
+    }
   return (
     <div className='navBar-container'>
         <div className="perfil">
@@ -28,12 +32,6 @@ const NavBar = () => {
         <nav>
             <ul>
                 <li>
-                    <NavLink to="/" className={({isActive}) => isActive ? "active":""}>
-                        <HomeIcon />
-                        Home
-                    </NavLink>
-                </li>
-                <li>
                     <NavLink to="/produtos" className={({isActive}) => isActive ? "active":""}>
                         <ShoppingCartIcon />
                         Produtos
@@ -45,17 +43,9 @@ const NavBar = () => {
                         Pedidos
                     </NavLink>
                 </li>
-                <li>
-                    <NavLink to="/equipes" className={({isActive}) => isActive ? "active":""}>
-                        <PersonIcon />
-                        Equipes
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink to="/atividades" className={({isActive}) => isActive ? "active":""}>
-                        <ChecklistIcon />
-                        Atividades
-                    </NavLink>
+                <li onClick={logOut}>
+                    <LogoutIcon />
+                    Sair
                 </li>
             </ul>
         </nav>

@@ -60,6 +60,7 @@ button{
   border-radius: 4px;
   padding: 6px 0px;
   letter-spacing: 2px;
+  cursor: pointer;
 }
 
 .outLineButton{
@@ -81,11 +82,11 @@ button{
   background-color: #222;
   border: 2px solid #222;
   transition: .4s;
-  padding: 6px 0px;
 }
 
 .darkButton:hover{
   background-color: #333;
+  border-color: #333;
 }
 
 .iconButton{

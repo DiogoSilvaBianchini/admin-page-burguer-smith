@@ -44,6 +44,15 @@
     gap: 16px;
 }
 
+.navBar-container nav ul li{
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+}
+
 .navBar-container nav ul li, .navBar-container a{
     display: flex;
     align-items: center;

@@ -1,14 +1,14 @@
 import './style.css'
 import ProductPage from './pages/ProductPage/ProductPage'
 import NavBar from './components/navBar/NavBar'
-import Home from './pages/Home/Home'
-import {BrowserRouter, Routes, Route, useNavigate} from 'react-router-dom'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import ProductFormPage from './pages/ProductFormPage/ProductFormPage'
 import Login from './pages/login/Login'
 import Register from './pages/Register/Register'
 import UserContext from './context/userContext'
-import { useContext, useEffect, useState } from 'react'
+import { useState } from 'react'
 import AutoGuard from './utils/AutoGuard'
+import SimpleFormUser from './pages/SimpleFormUser/SimpleFormUser'
 
 
 function App() {
@@ -23,8 +23,8 @@ function App() {
             <Routes>
               <Route path='/login' element={<Login />}/>
               <Route path='/register' element={<Register />}/>
+              <Route path='/simpleRegister' element={<SimpleFormUser />}/>
               <Route element={<AutoGuard />}>
-                <Route path='/' element={<Home />}/>
                 <Route path='/produtos' element={<ProductPage />}/>
                 <Route path='/produtos/criar' element={<ProductFormPage />}/>
               </Route>

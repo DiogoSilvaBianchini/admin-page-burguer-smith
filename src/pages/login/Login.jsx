@@ -15,9 +15,29 @@ const Login = () => {
   const [error, setError] = useState("")
   const navigate = useNavigate()
   
-  const googleSucessLogin = (credentialResponse) => {
+  const googleSucessLogin = async (credentialResponse) => {
     let token = credentialResponse.credential
     let decodeToken = jwtDecode(token)
+    const payload = {
+      name: decodeToken.name,
+      email: decodeToken.email
+    }
+
+    const req = await fetch(`${import.meta.env.VITE_BACK_END_URL}/user/login/google`, {
+      headers: {"Content-Type":"application/json"},
+      method: "POST",
+      body: JSON.stringify(payload)
+    })
+    
+    const res = await req.json()
+   
+    if(res.status == 301){
+      navigate(`/simpleRegister?name=${payload.name}&email=${payload.email}`)
+    }else{
+      const token = res.results
+      createCookie(token)
+      navigate("/produtos")
+    }
   }
 
   const googleErrorLogin = (err) => {
@@ -72,7 +92,7 @@ const Login = () => {
         setError("E-mail ou senha incorreto!")
       }else{
         createCookie(res.results)
-        navigate("/")
+        navigate("/produtos")
       }
     }
   }
